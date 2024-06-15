@@ -23,7 +23,9 @@ class InputData(BaseModel):
     Body_Temp: float
 
 # Configure CORS
-origins = os.getenv("ALLOWED_ORIGINS").split(",")
+origins = [
+    os.getenv("ALLOWED_ORIGINS")
+]
 
 app.add_middleware(
     CORSMiddleware,
@@ -51,4 +53,4 @@ def predict(input_data: InputData):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT", 8000)))
