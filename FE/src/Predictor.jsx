@@ -49,7 +49,7 @@ export const Predictor = () => {
     }, 2000);
   };
 
-  const predictorURL = process.env.PREDICTOR_API_URL;
+  const predictorURL = import.meta.env.VITE_PREDICTOR_API_URL;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
