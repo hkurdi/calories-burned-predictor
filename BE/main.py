@@ -2,6 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from .env file
+load_dotenv()
 
 app = FastAPI()
 
@@ -18,9 +23,7 @@ class InputData(BaseModel):
     Body_Temp: float
 
 # Configure CORS
-origins = [
-    "http://localhost:5173",  # React app's local address
-]
+origins = os.getenv("ALLOWED_ORIGINS").split(",")
 
 app.add_middleware(
     CORSMiddleware,
@@ -29,6 +32,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to the Calories Burned Predictor API"}
 
 @app.post("/predict")
 def predict(input_data: InputData):
