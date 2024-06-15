@@ -22,10 +22,8 @@ class InputData(BaseModel):
     Heart_Rate: float
     Body_Temp: float
 
-# Configure CORS
-origins = [
-    os.getenv("ALLOWED_ORIGINS")
-]
+# Get allowed origins from environment variable
+origins = os.getenv("ALLOWED_ORIGINS", "").split(",")
 
 app.add_middleware(
     CORSMiddleware,
@@ -34,10 +32,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-@app.get("/")
-def read_root():
-    return {"message": "Welcome to the Calories Burned Predictor API"}
 
 @app.post("/predict")
 def predict(input_data: InputData):
@@ -53,4 +47,4 @@ def predict(input_data: InputData):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT", 8000)))
+    uvicorn.run(app, host="0.0.0.0", port=8000)
