@@ -5,12 +5,10 @@ import joblib
 from dotenv import load_dotenv
 import os
 
-# Load environment variables from .env file
 load_dotenv()
 
 app = FastAPI()
 
-# Load the model
 model = joblib.load("calories_burned_model.pkl")
 
 class InputData(BaseModel):
@@ -22,7 +20,6 @@ class InputData(BaseModel):
     Heart_Rate: float
     Body_Temp: float
 
-# Get allowed origins from environment variable
 origins = os.getenv("ALLOWED_ORIGINS", "").split(",")
 
 app.add_middleware(
@@ -33,6 +30,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
+@app.get("/")
+def read_root():
+    return  {"Success" : "Calories Burned Predictor Model API - By Hamza Luay Kurdi, 2024."}
+
 @app.post("/predict")
 def predict(input_data: InputData):
     data = [[
@@ -41,7 +43,6 @@ def predict(input_data: InputData):
         input_data.Body_Temp
     ]]
     prediction = model.predict(data)
-    # Convert numpy.float32 to Python float
     prediction_float = float(prediction[0])
     return {"prediction": prediction_float}
 

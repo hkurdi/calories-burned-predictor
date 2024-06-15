@@ -14,7 +14,7 @@ export const Predictor = () => {
   const [isClearButtonClicked, setClearButtonClicked] = useState(false);
 
   const information = [
-        `Hey there! I am Hamza Kurdi, and I am excited to share my first-ever machine learning project with you: the Calories Burned Predictor. This project is all about estimating the number of calories you burn during different physical activities.<br>
+        `Hello there! I am Hamza Kurdi, and I am excited to share my first-ever machine learning project with you: the Calories Burned Predictor. This project is all about estimating the number of calories you burn during different physical activities.<br>
                 <br>
     This is my very first step into the world of machine learning, and I could not be more thrilled about how it turned out. It has been a fantastic learning experience. This project not only serves a practical purpose but also showcases how machine learning can be applied to health and fitness. <br><br>
         <b>Technologies Used:</b><br><br>
