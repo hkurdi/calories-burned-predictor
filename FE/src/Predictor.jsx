@@ -49,10 +49,12 @@ export const Predictor = () => {
     }, 2000);
   };
 
+  const predictorURL = process.env.PREDICTOR_API_URL;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8000/predict", {
+      const response = await axios.post(`${predictorURL}/predict`, {
         Age: parseInt(age),
         Gender: parseInt(gender),
         Height: parseFloat(height),
